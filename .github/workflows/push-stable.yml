@@ -1,5 +1,5 @@
 # Post-releae update of the stable branch
-name: Update [stable]
+name: Push to [stable]
 
 on:
   release:
@@ -8,6 +8,8 @@ on:
 
 jobs:
   push-to-stable:
+    name: Push to [stable]
+    environment: stable
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

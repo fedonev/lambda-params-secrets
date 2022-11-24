@@ -1,13 +1,12 @@
 # Post-release Publish Docs
 # Source: starter workflow repo https://github.com/actions/starter-workflows/blob/main/pages/static.yml
-name: Publish docs to Github Pages
+name: Publish Docs
 
 on:
   release:
     types: [published]
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write      # to deploy to Pages
@@ -20,7 +19,7 @@ concurrency:
 
 jobs:
   publish-docs:
-    # Deploy to the github-pages environment
+    name: Publish Docs
     environment:
       name: github-pages
       url: '${{ steps.deployment.outputs.page_url }}' # single quote supresses VSCode extension intellisense issue https://github.com/cschleiden/vscode-github-actions/issues/175
