@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Stack Overflow
+    url: https://stackoverflow.com/questions/tagged/aws-lambda
+    about: Please ask questions about the AWS Lambda Parameters and Secrets Extension on SO.

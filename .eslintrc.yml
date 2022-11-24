@@ -1,0 +1,21 @@
+# https://eslint.org/docs/latest/user-guide/configuring/
+env:
+  node: true
+  es6: true
+extends:
+  - 'plugin:@typescript-eslint/recommended'
+  - 'plugin:prettier/recommended' # https://github.com/prettier/eslint-plugin-prettier#recommended-configuration
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+parser: '@typescript-eslint/parser' # https://typescript-eslint.io/docs/
+parserOptions:
+  ecmaVersion: 2020 # https://node.green
+  sourceType: module # allow imports
+plugins:
+  - '@typescript-eslint'
+ignorePatterns:
+  - 'src/*.js'
+rules:
+  'prettier/prettier': 'error'
+  '@typescript-eslint/ban-ts-ignore': 0

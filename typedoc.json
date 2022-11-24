@@ -1,0 +1,8 @@
+/**
+ * Typedoc configuration
+ * https://typedoc.org/guides/options/
+ */
+{
+  "entryPoints": ["./src/index.ts"],
+  "out": "./build/docs"
+}

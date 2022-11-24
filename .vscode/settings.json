@@ -1,0 +1,12 @@
+{
+  // start - use eslint for formatting
+  "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
+  "eslint.validate": ["javascript", "typescript"],
+  "[typescript]": {
+    "editor.formatOnSave": false
+  },
+  "[javascript]": {
+    "editor.formatOnSave": false
+  }
+  // end - use eslint for formatting
+}

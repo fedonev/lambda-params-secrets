@@ -1,0 +1,31 @@
+*.js
+*.d.ts
+node_modules
+
+# artifacts
+build
+dist
+coverage
+
+# cdk
+cdk.local
+cdk.out
+cdk.outputs.json
+
+# vscode
+*.code-workspace
+
+# local only
+scratch
+.env
+env.*
+
+# logging
+logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# misc
+.DS_Store
+~$*

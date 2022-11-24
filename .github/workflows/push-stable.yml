@@ -1,0 +1,24 @@
+# Post-releae update of the stable branch
+name: Update [stable]
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  push-to-stable:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Merge
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@github.com
+          git fetch origin stable --depth=1
+          git checkout -b stable
+          git merge ${{ github.event.release.name }} --ff-only
+          git push origin stable

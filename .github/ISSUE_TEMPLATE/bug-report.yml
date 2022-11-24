@@ -1,0 +1,44 @@
+---
+name: 'Bug Report'
+description: Report a bug.
+labels: [bug]
+assignees: []
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Ran X.  Expected Y.  Got Z.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Possible Solution
+      description: Suggest a fix for the bug.
+      placeholder: The bug may be caused by...
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Information
+      description: Anything else that might be relevant for troubleshooting this bug.
+    validations:
+      required: false
+  - type: input
+    id: package-version
+    attributes:
+      label: Package Version
+      description: npm ls lambda-params-secrets
+    validations:
+      required: true
+  - type: input
+    id: lambda-node-version
+    attributes:
+      label: Lambda Node.js Version
+      description: e.g. 14, 16, 18
+      placeholder: '18'
+    validations:
+      required: true

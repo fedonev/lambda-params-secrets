@@ -1,0 +1,43 @@
+/**
+ * Main project TSConfig
+ *
+ * docs: https://www.typescriptlang.org/tsconfig
+ * tsbases: https://github.com/tsconfig/bases/blob/main/bases
+ */
+{
+  "compilerOptions": {
+    // begin @tsconfig/node18
+    "lib": ["es2022"],
+    "module": "commonjs",
+    "target": "es2022",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    // end @tsconfig/node18
+    "noImplicitAny": false,
+    "noUnusedParameters": false,
+    "strictPropertyInitialization": false,
+    "declaration": false,
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true
+  },
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.mock.ts",
+    "**/*.test.ts",
+    "node_modules",
+    "dist",
+    "scripts",
+    "jest.config.ts"
+  ]
+}

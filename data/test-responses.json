@@ -1,0 +1,285 @@
+{
+  "/systemsmanager/parameters/get?name=%2Flambda-ext-test-param%2Fdummy-string": {
+    "description": "The stringParameter method returns a string for a String Parameter.",
+    "value": "my-string-param-value",
+    "response": {
+      "Parameter": {
+        "ARN": "arn:aws:ssm:us-east-1:123456789012:parameter/lambda-ext-test-param/dummy-string",
+        "DataType": "text",
+        "LastModifiedDate": "2022-11-16T08:22:40.362Z",
+        "Name": "/lambda-ext-test-param/dummy-string",
+        "Selector": null,
+        "SourceResult": null,
+        "Type": "String",
+        "Value": "my-string-param-value",
+        "Version": 1
+      },
+      "ResultMetadata": {}
+    }
+  },
+  "/systemsmanager/parameters/get?name=%2Flambda-ext-test-param%2Fdummy-string-list": {
+    "description": "The stringListParameter method returns as array of strings for a StringList",
+    "value": ["listval-0", "listval-1", "listval-2"],
+    "response": {
+      "Parameter": {
+        "ARN": "arn:aws:ssm:us-east-1:123456789012:parameter/lambda-ext-test-param/dummy-string-list",
+        "DataType": "text",
+        "LastModifiedDate": "2022-11-16T08:22:40.089Z",
+        "Name": "/lambda-ext-test-param/dummy-string-list",
+        "Selector": null,
+        "SourceResult": null,
+        "Type": "StringList",
+        "Value": "listval-0,listval-1,listval-2",
+        "Version": 1
+      },
+      "ResultMetadata": {}
+    }
+  },
+  "/systemsmanager/parameters/get?name=%2Flambda-ext-test-param%2Fdummy-string-list&version=1": {
+    "description": "The stringParameter method returns a comma-deliminated string for a StringList",
+    "value": "listval-0,listval-1,listval-2",
+    "response": {
+      "Parameter": {
+        "ARN": "arn:aws:ssm:us-east-1:123456789012:parameter/lambda-ext-test-param/dummy-string-list",
+        "DataType": "text",
+        "LastModifiedDate": "2022-11-16T08:22:40.089Z",
+        "Name": "/lambda-ext-test-param/dummy-string-list",
+        "Selector": ":1",
+        "SourceResult": null,
+        "Type": "StringList",
+        "Value": "listval-0,listval-1,listval-2",
+        "Version": 1
+      },
+      "ResultMetadata": {}
+    }
+  },
+  "/systemsmanager/parameters/get?name=%2Flambda-ext-test-param%2Fdummy-secure-string&withDecryption=true": {
+    "description": "The secureStringParameter method decrypts the SecureString by default",
+    "value": "my-secure-string-value - 2022-11-16T08:24:05.476Z",
+    "response": {
+      "Parameter": {
+        "ARN": "arn:aws:ssm:us-east-1:123456789012:parameter/lambda-ext-test-param/dummy-secure-string",
+        "DataType": "text",
+        "LastModifiedDate": "2022-11-16T08:24:05.571Z",
+        "Name": "/lambda-ext-test-param/dummy-secure-string",
+        "Selector": null,
+        "SourceResult": null,
+        "Type": "SecureString",
+        "Value": "my-secure-string-value - 2022-11-16T08:24:05.476Z",
+        "Version": 2
+      },
+      "ResultMetadata": {}
+    }
+  },
+  "/systemsmanager/parameters/get?name=%2Flambda-ext-test-param%2Fdummy-secure-string&version=1": {
+    "description": "The stringParameter method returns a SecureString's *encrypted* value.",
+    "value": "AQICAHi8ZBkII2m75zRZu97F0LZqN4bUJnuTssowKANvGx9x5gH09DCE2tK7vF7rnVxEGLzpAAAAdDByBgkqhkiG9w0BBwagZTBjAgEAMF4GCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMmaan248amrNDs74HAgEQgDHVB0HGmw+RtVmNbkIF5g5wxrJuNf94D79AB4N3Vcnf1FDomJJtkqHMJdrVAZKmcwxp",
+    "response": {
+      "Parameter": {
+        "ARN": "arn:aws:ssm:us-east-1:123456789012:parameter/lambda-ext-test-param/dummy-secure-string",
+        "DataType": "text",
+        "LastModifiedDate": "2022-11-16T08:24:05.374Z",
+        "Name": "/lambda-ext-test-param/dummy-secure-string",
+        "Selector": ":1",
+        "SourceResult": null,
+        "Type": "SecureString",
+        "Value": "AQICAHi8ZBkII2m75zRZu97F0LZqN4bUJnuTssowKANvGx9x5gH09DCE2tK7vF7rnVxEGLzpAAAAdDByBgkqhkiG9w0BBwagZTBjAgEAMF4GCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMmaan248amrNDs74HAgEQgDHVB0HGmw+RtVmNbkIF5g5wxrJuNf94D79AB4N3Vcnf1FDomJJtkqHMJdrVAZKmcwxp",
+        "Version": 1
+      },
+      "ResultMetadata": {}
+    }
+  },
+  "/systemsmanager/parameters/get?name=%2Flambda-ext-test-param%2Fdummy-secure-string&label=Dev&withDecryption=true": {
+    "description": "The secureStringParameter method with optional Parameter label set.",
+    "value": "my-secure-string-value",
+    "response": {
+      "Parameter": {
+        "ARN": "arn:aws:ssm:us-east-1:123456789012:parameter/lambda-ext-test-param/dummy-secure-string",
+        "DataType": "text",
+        "LastModifiedDate": "2022-11-16T08:24:05.374Z",
+        "Name": "/lambda-ext-test-param/dummy-secure-string",
+        "Selector": ":Dev",
+        "SourceResult": null,
+        "Type": "SecureString",
+        "Value": "my-secure-string-value",
+        "Version": 1
+      },
+      "ResultMetadata": {}
+    }
+  },
+  "/secretsmanager/get?secretId=dummy-string-secret": {
+    "description": "The stringSecret method returns the unencrypted string for a String Secret.",
+    "value": "an-insecure-string-secret-value",
+    "response": {
+      "ARN": "arn:aws:secretsmanager:us-east-1:123456789012:secret:dummy-string-secret-MFUBmH",
+      "CreatedDate": "2022-11-16T08:22:40.499Z",
+      "Name": "dummy-string-secret",
+      "SecretBinary": null,
+      "SecretString": "an-insecure-string-secret-value",
+      "VersionId": "b1c367b9-7f53-4a47-82c4-be51a054b953",
+      "VersionStages": ["AWSCURRENT"],
+      "ResultMetadata": {}
+    }
+  },
+  "/secretsmanager/get?secretId=dummy-string-secret&versionStage=AWSCURRENT": {
+    "description": "The stringSecret method with versionStage set.  Returns the string value for a VersionStage.",
+    "value": "an-insecure-string-secret-value",
+    "response": {
+      "ARN": "arn:aws:secretsmanager:us-east-1:123456789012:secret:dummy-string-secret-MFUBmH",
+      "CreatedDate": "2022-11-16T08:22:40.499Z",
+      "Name": "dummy-string-secret",
+      "SecretBinary": null,
+      "SecretString": "an-insecure-string-secret-value",
+      "VersionId": "b1c367b9-7f53-4a47-82c4-be51a054b953",
+      "VersionStages": ["AWSCURRENT"],
+      "ResultMetadata": {}
+    }
+  },
+  "/systemsmanager/parameters/get?name=%2Faws%2Freference%2Fsecretsmanager%2Fdummy-string-secret&withDecryption=true": {
+    "description": "The stringSecretfromParameterStore method returns a Secret using the Parameter Store endpoint.",
+    "value": "an-insecure-string-secret-value",
+    "response": {
+      "Parameter": {
+        "ARN": "arn:aws:secretsmanager:us-east-1:123456789012:secret:dummy-string-secret-MFUBmH",
+        "DataType": null,
+        "LastModifiedDate": "2022-11-16T08:22:40.499Z",
+        "Name": "/aws/reference/secretsmanager/dummy-string-secret",
+        "Selector": null,
+        "SourceResult": "{\"ARN\":\"arn:aws:secretsmanager:us-east-1:123456789012:secret:dummy-string-secret-MFUBmH\",\"name\":\"dummy-string-secret\",\"versionId\":\"b1c367b9-7f53-4a47-82c4-be51a054b953\",\"secretString\":\"an-insecure-string-secret-value\",\"versionStages\":[\"AWSCURRENT\"],\"createdDate\":\"Nov 16, 2022, 8:22:40 AM\"}",
+        "Type": "SecureString",
+        "Value": "an-insecure-string-secret-value",
+        "Version": 0
+      },
+      "ResultMetadata": {}
+    }
+  },
+  "/systemsmanager/parameters/get?name=%2Faws%2Freference%2Fsecretsmanager%2Fdummy-binary-secret&label=AWSPREVIOUS&withDecryption=true": {
+    "description": "The binarySecretfromParameterStore method with a VersionStage (as the `label` parameter) returns a decrypted `AWSPREVIOUS` Binary Secret using the Parameter Store endpoint.",
+    "value": {
+      "type": "Buffer",
+      "data": [
+        97, 32, 115, 116, 114, 105, 110, 103, 32, 115, 101, 99, 114, 101, 116,
+        32, 118, 97, 108, 117, 101, 32, 116, 111, 32, 98, 101, 32, 115, 97, 118,
+        101, 100, 32, 97, 115, 32, 98, 105, 110, 97, 114, 121
+      ]
+    },
+    "response": {
+      "Parameter": {
+        "ARN": "arn:aws:secretsmanager:us-east-1:123456789012:secret:dummy-binary-secret-yTDWrV",
+        "DataType": null,
+        "LastModifiedDate": "2022-11-16T08:24:07.032Z",
+        "Name": "/aws/reference/secretsmanager/dummy-binary-secret",
+        "Selector": ":AWSPREVIOUS",
+        "SourceResult": "{\"ARN\":\"arn:aws:secretsmanager:us-east-1:123456789012:secret:dummy-binary-secret-yTDWrV\",\"name\":\"dummy-binary-secret\",\"versionId\":\"fdfc9fe2-e172-498e-b306-ad660c887b7a\",\"secretBinary\":{\"hb\":[97,32,115,116,114,105,110,103,32,115,101,99,114,101,116,32,118,97,108,117,101,32,116,111,32,98,101,32,115,97,118,101,100,32,97,115,32,98,105,110,97,114,121],\"offset\":0,\"isReadOnly\":false,\"bigEndian\":true,\"nativeByteOrder\":false,\"mark\":-1,\"position\":0,\"limit\":43,\"capacity\":43,\"address\":16},\"versionStages\":[\"AWSPREVIOUS\"],\"createdDate\":\"Nov 16, 2022, 8:24:07 AM\"}",
+        "Type": "SecureString",
+        "Value": null,
+        "Version": 0
+      },
+      "ResultMetadata": {}
+    }
+  },
+  "/secretsmanager/get?secretId=dummy-binary-secret": {
+    "description": "The binarySecret method decodes the extension's Base64-encoded Uint8Array to a Buffer",
+    "value": {
+      "type": "Buffer",
+      "data": [
+        97, 32, 115, 116, 114, 105, 110, 103, 32, 115, 101, 99, 114, 101, 116,
+        32, 118, 97, 108, 117, 101, 32, 116, 111, 32, 98, 101, 32, 115, 97, 118,
+        101, 100, 32, 97, 115, 32, 98, 105, 110, 97, 114, 121, 32, 117, 112,
+        100, 97, 116, 101, 100, 86, 101, 114, 115, 105, 111, 110, 33
+      ]
+    },
+    "response": {
+      "ARN": "arn:aws:secretsmanager:us-east-1:123456789012:secret:dummy-binary-secret-yTDWrV",
+      "CreatedDate": "2022-11-16T08:24:07.213Z",
+      "Name": "dummy-binary-secret",
+      "SecretBinary": "YSBzdHJpbmcgc2VjcmV0IHZhbHVlIHRvIGJlIHNhdmVkIGFzIGJpbmFyeSB1cGRhdGVkVmVyc2lvbiE=",
+      "SecretString": null,
+      "VersionId": "5ce2760a-2802-4c73-bd99-63d49ab6b5ef",
+      "VersionStages": ["AWSCURRENT"],
+      "ResultMetadata": {}
+    }
+  },
+  "/secretsmanager/get?secretId=dummy-binary-secret&versionStage=AWSPREVIOUS": {
+    "description": "The binarySecret method with the VersionStage label option set.",
+    "value": {
+      "type": "Buffer",
+      "data": [
+        97, 32, 115, 116, 114, 105, 110, 103, 32, 115, 101, 99, 114, 101, 116,
+        32, 118, 97, 108, 117, 101, 32, 116, 111, 32, 98, 101, 32, 115, 97, 118,
+        101, 100, 32, 97, 115, 32, 98, 105, 110, 97, 114, 121
+      ]
+    },
+    "response": {
+      "ARN": "arn:aws:secretsmanager:us-east-1:123456789012:secret:dummy-binary-secret-yTDWrV",
+      "CreatedDate": "2022-11-16T08:24:07.032Z",
+      "Name": "dummy-binary-secret",
+      "SecretBinary": "YSBzdHJpbmcgc2VjcmV0IHZhbHVlIHRvIGJlIHNhdmVkIGFzIGJpbmFyeQ==",
+      "SecretString": null,
+      "VersionId": "fdfc9fe2-e172-498e-b306-ad660c887b7a",
+      "VersionStages": ["AWSPREVIOUS"],
+      "ResultMetadata": {}
+    }
+  },
+  "/secretsmanager/get?secretId=dummy-binary-secret&versionId=5ce2760a-2802-4c73-bd99-63d49ab6b5ef": {
+    "description": "The binarySecret method with the VersionId option set.",
+    "value": {
+      "type": "Buffer",
+      "data": [
+        97, 32, 115, 116, 114, 105, 110, 103, 32, 115, 101, 99, 114, 101, 116,
+        32, 118, 97, 108, 117, 101, 32, 116, 111, 32, 98, 101, 32, 115, 97, 118,
+        101, 100, 32, 97, 115, 32, 98, 105, 110, 97, 114, 121, 32, 117, 112,
+        100, 97, 116, 101, 100, 86, 101, 114, 115, 105, 111, 110, 33
+      ]
+    },
+    "response": {
+      "ARN": "arn:aws:secretsmanager:us-east-1:123456789012:secret:dummy-binary-secret-yTDWrV",
+      "CreatedDate": "2022-11-16T08:24:07.213Z",
+      "Name": "dummy-binary-secret",
+      "SecretBinary": "YSBzdHJpbmcgc2VjcmV0IHZhbHVlIHRvIGJlIHNhdmVkIGFzIGJpbmFyeSB1cGRhdGVkVmVyc2lvbiE=",
+      "SecretString": null,
+      "VersionId": "5ce2760a-2802-4c73-bd99-63d49ab6b5ef",
+      "VersionStages": ["AWSCURRENT"],
+      "ResultMetadata": {}
+    }
+  },
+  "/systemsmanager/parameters/get?name=does-not-exist": {
+    "description": "Error: non-existent or unauthorized parameter.",
+    "value": null,
+    "response": {
+      "error": "400 Bad Request: an unexpected error occurred while executing request"
+    }
+  },
+  "/systemsmanager/parameters/get?name=%2Flambda-ext-test-param%2Fdummy-string-list&version=0": {
+    "description": "Error: invalid Parameter version number.",
+    "value": null,
+    "response": {
+      "error": "400 Bad Request: an unexpected error occurred while executing request"
+    }
+  },
+  "/systemsmanager/parameters/get?name=%2Flambda-ext-test-param%2Fdummy-string&version=1": {
+    "description": "Error: stringListParameter can only be called on a StringList parameter.",
+    "value": null,
+    "response": {
+      "Parameter": {
+        "ARN": "arn:aws:ssm:us-east-1:123456789012:parameter/lambda-ext-test-param/dummy-string",
+        "DataType": "text",
+        "LastModifiedDate": "2022-11-16T08:22:40.362Z",
+        "Name": "/lambda-ext-test-param/dummy-string",
+        "Selector": ":1",
+        "SourceResult": null,
+        "Type": "String",
+        "Value": "my-string-param-value",
+        "Version": 1
+      },
+      "ResultMetadata": {}
+    }
+  },
+  "/secretsmanager/get?secretId=dummy-string-secret&versionStage=DOESNOTEXIST": {
+    "description": "Error: non-existent versionStage.",
+    "value": null,
+    "response": {
+      "error": "400 Bad Request: an unexpected error occurred while executing request"
+    }
+  }
+}

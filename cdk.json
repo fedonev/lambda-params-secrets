@@ -1,0 +1,7 @@
+{
+  "app": "ts-node ./cdk/bin/app.ts",
+  "requireApproval": "never",
+  "build": "tsc",
+  "watch": { "include": "./cdk/lib/*.ts", "exclude": "**/*.test.ts" },
+  "context": { "@aws-cdk/aws-iam:minimizePolicies": true }
+}
