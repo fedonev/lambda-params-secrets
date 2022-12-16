@@ -31,9 +31,11 @@
     "cdk-deploy": "npx cdk deploy --all --output ./cdk/cdk.out --outputs-file ./cdk/cdk.outputs.json",
     "cdk-destroy": "npx cdk destroy --all --output ./cdk/cdk.out"
   },
-  "devDependencies": {
+  "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.200.0",
-    "@aws-sdk/client-ssm": "^3.200.0",
+    "@aws-sdk/client-ssm": "^3.200.0"
+  },
+  "devDependencies": {
     "@types/aws-lambda": "^8.10.108",
     "@types/jest": "^29.2.0",
     "@types/node": "^18.11.9",

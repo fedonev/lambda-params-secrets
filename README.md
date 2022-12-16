@@ -21,6 +21,8 @@ A Node.js client for the [AWS Lambda Parameters and Secrets Extension](https://a
 npm install --save lambda-params-secrets
 ```
 
+The main `Client` class itself has zero dependencies.  The package has dependencies on the AWS JS SDK v3 clients `@aws-sdk/client-secrets-manager` and `@aws-sdk/client-ssm` for their Typescript type definitions only.
+
 ### Usage
 
 Instantiate a Client in your Lambda function handler. Call the Client's methods to get values:
