@@ -6,16 +6,17 @@
  */
 {
   "compilerOptions": {
-    // begin @tsconfig/node18
-    "lib": ["es2022"],
+    // begin @tsconfig/node14
+    "lib": ["es2020"],
     "module": "commonjs",
-    "target": "es2022",
+    "target": "es2020",
+
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
-    // end @tsconfig/node18
+    // end @tsconfig/node14
     "noImplicitAny": false,
     "noUnusedParameters": false,
     "strictPropertyInitialization": false,
@@ -26,8 +27,6 @@
     "noUnusedLocals": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "inlineSourceMap": true,
-    "inlineSources": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true
   },
