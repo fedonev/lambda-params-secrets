@@ -2,7 +2,7 @@
  * TSConfig for the npm package build
  *
  * docs: https://www.typescriptlang.org/tsconfig
- * tsbases: https://github.com/tsconfig/bases/blob/main/bases/node16.json
+ * tsbases: https://github.com/tsconfig/bases/blob/main/bases
  */
 {
   "extends": "./tsconfig.json",
