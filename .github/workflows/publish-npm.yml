@@ -34,6 +34,6 @@ jobs:
           cp README.md CHANGELOG.md LICENSE ./dist
           jq 'del(.devDependencies) | del(.scripts)' package.json > ./dist/package.json
       - name: Publish
-        run: cd dist && npm publish --dry-run
+        run: cd dist && npm publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }} 
