@@ -25,21 +25,21 @@ jobs:
       url: '${{ steps.deployment.outputs.page_url }}' # single quote supresses VSCode extension intellisense issue https://github.com/cschleiden/vscode-github-actions/issues/175
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3 # https://github.com/actions/checkout
-      - uses: actions/setup-node@v3 # https://github.com/actions/setup-node
+      - uses: actions/checkout@v4 # https://github.com/actions/checkout
+      - uses: actions/setup-node@v4 # https://github.com/actions/setup-node
         with:
-          node-version: 18
+          node-version: 20
           cache: npm
       - run: npm ci
       - run: npm run build
       - name: Build Docs
         run: npm run build-docs
       - name: Setup Pages
-        uses: actions/configure-pages@v2 # https://github.com/actions/configure-pages
+        uses: actions/configure-pages@v4 # https://github.com/actions/configure-pages
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v1 # https://github.com/actions/upload-pages-artifact
         with:
           path: './build/docs'
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1 # https://github.com/actions/deploy-pages
+        uses: actions/deploy-pages@v2 # https://github.com/actions/deploy-pages
