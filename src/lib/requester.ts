@@ -63,7 +63,10 @@ export class HttpResponse implements Response {
     return new HttpResponse(`${statusCode} ${statusMessage}: ${data}`, true);
   }
 
-  private constructor(private data: string, public isError: boolean = false) {}
+  private constructor(
+    private data: string,
+    public isError: boolean = false
+  ) {}
 
   get text(): string | null {
     return this.isError ? null : this.data;

@@ -1,0 +1,1 @@
+trailingComma: es5 # "es5" was default until v3.0.0; now "all"
