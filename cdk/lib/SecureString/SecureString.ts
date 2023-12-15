@@ -47,9 +47,9 @@ export class SecureString extends Construct {
     const fn = new nodejs.NodejsFunction(this, "CRHandler", {
       description: "A Custom Resource handler for the SecureString",
       entry: path.join(__dirname, "handler.ts"),
-      runtime: lambda.Runtime.NODEJS_16_X,
+      runtime: lambda.Runtime.NODEJS_18_X,
       architecture: lambda.Architecture.ARM_64,
-      reservedConcurrentExecutions: 1,
+      //reservedConcurrentExecutions: 1,
       initialPolicy: [
         new iam.PolicyStatement({
           effect: iam.Effect.ALLOW,

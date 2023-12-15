@@ -70,7 +70,7 @@ describe("Client returns the expected mock requests.", () => {
     test("An unknown parameter name request returns an error response.", async () => {
       expect(await client.parameterResponse("does-not-exist")).toEqual({
         error:
-          "400 Bad Request: an unexpected error occurred while executing request",
+          "400 Bad Request - an unexpected error occurred while executing request",
       });
     });
   });

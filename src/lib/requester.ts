@@ -1,5 +1,7 @@
 import http from "http";
 import https from "https";
+// https://stackoverflow.com/questions/71294230/how-can-i-use-native-fetch-with-node-in-typescript-node-v17-6
+import type { HeadersInit } from "undici";
 
 /**
  * Requesters return this.
@@ -27,7 +29,7 @@ export interface Requester {
    * Set the request headers
    * @param headers request headers
    */
-  addHeaders(headers: http.OutgoingHttpHeaders): void;
+  addHeaders(headers: http.OutgoingHttpHeaders | HeadersInit): void;
 
   /**
    * GET the Parameter or Secret
@@ -60,7 +62,7 @@ export class HttpResponse implements Response {
     statusCode: number | string,
     statusMessage: string,
   ): Response {
-    return new HttpResponse(`${statusCode} ${statusMessage}: ${data}`, true);
+    return new HttpResponse(`${statusCode} ${statusMessage} - ${data}`, true);
   }
 
   private constructor(
@@ -107,7 +109,7 @@ export class HttpRequester implements Requester {
   }
 
   async get(url: string): Promise<Response> {
-    // https://nodejs.org/api/http.html#http_class_http_serverresponse
+    // https://developer.mozilla.org/en-US/docs/Web/API/fetch
     const res = await new Promise<http.IncomingMessage>((resolve) => {
       const components = new URL(url);
       const getter = components.protocol.startsWith("https") ? https : http;
@@ -136,5 +138,52 @@ export class HttpRequester implements Requester {
           "<Rejection>",
         ),
       );
+  }
+}
+
+/**
+ * A Native Fetch GET client.
+ *
+ * Implementation: NodeJS `fetch` library.
+ * Requires NoeJS 18 or higher.
+ */
+export class FetchRequester implements Requester {
+  public headers: HeadersInit;
+
+  constructor(headers?: HeadersInit) {
+    this.headers = {
+      "User-Agent": "Other",
+      ...headers,
+    };
+  }
+
+  addHeaders(headers: HeadersInit): void {
+    this.headers = headers;
+  }
+
+  async get(url: string): Promise<Response> {
+    try {
+      const res = await fetch(url, { headers: this.headers });
+
+      if (res.ok) {
+        const text = await res.text();
+        const json = JSON.parse(text);
+        return {
+          text,
+          json,
+          error: null,
+        };
+      } else {
+        return HttpResponse.failureResponse(
+          "Response is not OK",
+          res.status,
+          res.statusText,
+        );
+      }
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error ? err.message : "Unknown Server Error";
+      return HttpResponse.failureResponse(message, "503", "Server Error");
+    }
   }
 }
