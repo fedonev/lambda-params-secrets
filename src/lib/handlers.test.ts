@@ -4,14 +4,14 @@ describe("Parameter paths", () => {
   test("Parameter path rendered", () => {
     const handler = new ParameterHandler({ parameterName: "/cdk/temp" });
     expect(handler.path).toBe(
-      "/systemsmanager/parameters/get?name=%2Fcdk%2Ftemp"
+      "/systemsmanager/parameters/get?name=%2Fcdk%2Ftemp",
     );
   });
 
   test("No-slash Parameter path rendered", () => {
     const handler = new ParameterHandler({ parameterName: "no-forward-slash" });
     expect(handler.path).toBe(
-      "/systemsmanager/parameters/get?name=no-forward-slash"
+      "/systemsmanager/parameters/get?name=no-forward-slash",
     );
   });
 
@@ -21,7 +21,7 @@ describe("Parameter paths", () => {
       version: 2,
     });
     expect(handler.path).toBe(
-      "/systemsmanager/parameters/get?name=%2Fcdk%2Ftemp&version=2"
+      "/systemsmanager/parameters/get?name=%2Fcdk%2Ftemp&version=2",
     );
   });
 
@@ -31,7 +31,7 @@ describe("Parameter paths", () => {
       fromSecretsManager: true,
     });
     expect(handler.path).toBe(
-      "/systemsmanager/parameters/get?name=%2Faws%2Freference%2Fsecretsmanager%2Fmy-secret"
+      "/systemsmanager/parameters/get?name=%2Faws%2Freference%2Fsecretsmanager%2Fmy-secret",
     );
   });
 
@@ -41,7 +41,7 @@ describe("Parameter paths", () => {
       fromSecretsManager: true,
     });
     expect(handler.path).toBe(
-      "/systemsmanager/parameters/get?name=%2Faws%2Freference%2Fsecretsmanager%2Fmy-secret"
+      "/systemsmanager/parameters/get?name=%2Faws%2Freference%2Fsecretsmanager%2Fmy-secret",
     );
   });
 });
@@ -58,7 +58,7 @@ describe("Secret paths", () => {
       versionId: "a55ed8eb-0d14-4c5c-877c-0a94c63709ed",
     });
     expect(pr.path).toBe(
-      "/secretsmanager/get?secretId=james-bond&versionId=a55ed8eb-0d14-4c5c-877c-0a94c63709ed"
+      "/secretsmanager/get?secretId=james-bond&versionId=a55ed8eb-0d14-4c5c-877c-0a94c63709ed",
     );
   });
 
@@ -68,7 +68,7 @@ describe("Secret paths", () => {
       versionStage: "AWSPREVIOUS",
     });
     expect(pr.path).toBe(
-      "/secretsmanager/get?secretId=james-bond&versionStage=AWSPREVIOUS"
+      "/secretsmanager/get?secretId=james-bond&versionStage=AWSPREVIOUS",
     );
   });
 });

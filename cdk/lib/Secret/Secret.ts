@@ -61,7 +61,7 @@ export class Secret extends Construct {
       (props.secretBinary && props.secretString)
     )
       throw new Error(
-        "Exactly one of secretString or secretBinary is required."
+        "Exactly one of secretString or secretBinary is required.",
       );
 
     this.secretName = props.secretName;

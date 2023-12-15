@@ -23,16 +23,16 @@ export class AppStacks extends Construct {
    */
   static checkEnv = (
     account: unknown,
-    region: unknown
+    region: unknown,
   ): { account: string; region: string } => {
     if (typeof account != "string" || !/\d{12}/.test(account))
       throw new Error(
-        `Provide an explicit AWS Account. ${account} is not a vaild Account.`
+        `Provide an explicit AWS Account. ${account} is not a vaild Account.`,
       );
 
     if (typeof region != "string" || !/[a-z]{2}-[a-z]{4,7}-\d/.test(region))
       throw new Error(
-        `Provide an explicit AWS Region. ${region} is not a vaild Region.`
+        `Provide an explicit AWS Region. ${region} is not a vaild Region.`,
       );
 
     return { account, region };
@@ -49,7 +49,7 @@ export class AppStacks extends Construct {
           "Retieve sample Parameters and Secrets from a Lambda using the P&S Extension.",
         env: props.env,
         terminationProtection: props.purpose === "Prod",
-      }
+      },
     );
 
     cdk.Tags.of(extensionStack).add("x:cdk:app-name", props.appName);

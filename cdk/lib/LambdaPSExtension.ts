@@ -51,13 +51,13 @@ export class LambdaPSExtension
 
     if (!layerArn) {
       cdk.Annotations.of(scope).addError(
-        "Cannot determine the Extension Layer ARN."
+        "Cannot determine the Extension Layer ARN.",
       );
     } else {
       this.#layer = lambda.LayerVersion.fromLayerVersionArn(
         scope,
         "ManagedLayer",
-        layerArn
+        layerArn,
       );
     }
   }
@@ -78,10 +78,10 @@ export class LambdaPSExtension
 
     return components.architecture
       ? regionArns.find(
-          (el) => el.architecture === components.architecture?.name
+          (el) => el.architecture === components.architecture?.name,
         )?.layerArn ?? null
       : regionArns.find(
-          (el) => el.architecture === cdk.aws_lambda.Architecture.X86_64.name
+          (el) => el.architecture === cdk.aws_lambda.Architecture.X86_64.name,
         )?.layerArn ?? null;
   }
 
