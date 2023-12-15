@@ -117,7 +117,7 @@ export class Client {
       props?.port ??
         process.env.PARAMETERS_SECRETS_EXTENSION_HTTP_PORT ??
         "2773",
-      10
+      10,
     );
 
     this.baseUrl = `http://localhost:${port}`;
@@ -127,7 +127,7 @@ export class Client {
     if (!token) {
       throw new Error(
         "Missing token.  Expected a AWS session token in AWS_SESSION_TOKEN." +
-          "\nEnsure the AWS-Parameters-and-Secrets-Lambda-Extension Layer is enabled on the Lambda."
+          "\nEnsure the AWS-Parameters-and-Secrets-Lambda-Extension Layer is enabled on the Lambda.",
       );
     }
 
@@ -140,7 +140,7 @@ export class Client {
    * Get the resource.
    */
   private async getResource<T extends ExtensionResponse>(
-    handler: Handler
+    handler: Handler,
   ): Promise<T | ErrorResponse> {
     const res = await this.requester.get(this.baseUrl + handler.path);
 
@@ -160,7 +160,7 @@ export class Client {
    */
   async stringParameter(
     parameterName: string,
-    options?: StringParameterOptions
+    options?: StringParameterOptions,
   ): Promise<string | null> {
     const response = await this.parameterResponse(parameterName, options);
 
@@ -169,7 +169,7 @@ export class Client {
 
     if (
       !["String", "StringList", "SecureString"].includes(
-        response.Parameter.Type
+        response.Parameter.Type,
       )
     ) {
       return null;
@@ -188,7 +188,7 @@ export class Client {
    */
   async stringListParameter(
     parameterName: string,
-    options?: StringListParameterOptions
+    options?: StringListParameterOptions,
   ): Promise<string[] | null> {
     const response = await this.parameterResponse(parameterName, options);
 
@@ -207,7 +207,7 @@ export class Client {
    */
   async secureStringParameter(
     parameterName: string,
-    options?: SecureStringParameterOptions
+    options?: SecureStringParameterOptions,
   ): Promise<string | null> {
     const response = await this.parameterResponse(parameterName, {
       withDecryption: true,
@@ -230,7 +230,7 @@ export class Client {
    */
   async stringSecretfromParameterStore(
     secretId: string,
-    options?: SecretFromParamStoreOptions
+    options?: SecretFromParamStoreOptions,
   ): Promise<string | null> {
     const response = await this.parameterResponse(secretId, {
       fromSecretsManager: true,
@@ -252,7 +252,7 @@ export class Client {
    */
   async binarySecretfromParameterStore(
     secretId: string,
-    options?: SecretFromParamStoreOptions
+    options?: SecretFromParamStoreOptions,
   ): Promise<Buffer | null> {
     const response = await this.parameterResponse(secretId, {
       fromSecretsManager: true,
@@ -279,7 +279,7 @@ export class Client {
    */
   async parameterResponse(
     parameterName: string,
-    options?: ParameterOptions
+    options?: ParameterOptions,
   ): Promise<ParameterResponse | ErrorResponse> {
     const handler = new ParameterHandler({
       parameterName,
@@ -310,7 +310,7 @@ export class Client {
    */
   async stringSecret(
     secretId: string,
-    options?: SecretOptions
+    options?: SecretOptions,
   ): Promise<string | null> {
     const response = await this.secretResponse(secretId, options);
 
@@ -329,7 +329,7 @@ export class Client {
    */
   async binarySecret(
     secretId: string,
-    options?: SecretOptions
+    options?: SecretOptions,
   ): Promise<Buffer | null> {
     const response = await this.secretResponse(secretId, options);
     // GetSecretValueCommandOutput: "The response parameter represents the binary data as a base64-encoded string.""
@@ -353,7 +353,7 @@ export class Client {
    */
   async secretResponse(
     secretId: string,
-    options?: SecretOptions
+    options?: SecretOptions,
   ): Promise<SecretResponse | ErrorResponse> {
     const handler = new SecretHandler({ secretId, ...options });
     return this.getResource(handler);

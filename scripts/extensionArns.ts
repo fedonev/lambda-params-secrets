@@ -13,7 +13,7 @@ import { ExtensionArn } from "../data/types";
   const requester = new HttpRequester();
 
   const res = await requester.get(
-    "https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-integration-lambda-extensions.html"
+    "https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-integration-lambda-extensions.html",
   );
 
   if (!res.text) throw new Error("No respoonse text!");
@@ -49,21 +49,21 @@ import { ExtensionArn } from "../data/types";
 
   Object.entries(arnSets).forEach(([k, v]) => {
     arns[k] = Array.from(v).sort(
-      (a, b) => b.architecture.localeCompare(a.architecture) // sort in descending order
+      (a, b) => b.architecture.localeCompare(a.architecture), // sort in descending order
     );
   });
 
   assert(
     Object.keys(arns).length >= 27,
-    "The number of regions with extension ARNs has not declined."
+    "The number of regions with extension ARNs has not declined.",
   );
   assert(
     Object.values(arns).flat(1).length >= 37,
-    "The number of Extension ARNs has not declined."
+    "The number of Extension ARNs has not declined.",
   );
 
   await fs.writeFile(
     path.join(__dirname, "../data/aws-layer-arns.json"),
-    JSON.stringify(arns, null, "  ") + "\n"
+    JSON.stringify(arns, null, "  ") + "\n",
   );
 })();

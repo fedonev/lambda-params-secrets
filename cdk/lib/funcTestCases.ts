@@ -127,7 +127,7 @@ export async function handler(): Promise<TestResponses> {
       description:
         "The stringSecretfromParameterStore method returns a Secret using the Parameter Store endpoint.",
       value: await client.stringSecretfromParameterStore(
-        cases.stringSecret.name
+        cases.stringSecret.name,
       ),
       response: await client.parameterResponse(cases.stringSecret.name, {
         withDecryption: true,
@@ -148,7 +148,7 @@ export async function handler(): Promise<TestResponses> {
         cases.binarySecret.name,
         {
           label: "AWSPREVIOUS",
-        }
+        },
       ),
       response: await client.parameterResponse(cases.binarySecret.name, {
         withDecryption: true,
@@ -236,7 +236,7 @@ export async function handler(): Promise<TestResponses> {
     return { result: "success", responses };
   } catch (err: unknown) {
     console.log(
-      err instanceof Error ? err.message : "An unknown error has occurred."
+      err instanceof Error ? err.message : "An unknown error has occurred.",
     );
 
     return { result: "failure", responses: { ...happy, ...unhappy } };

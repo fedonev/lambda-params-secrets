@@ -23,7 +23,7 @@ type Event = Omit<CdkCustomResourceEvent, "ResourceProperties"> & {
  * [lifecycle events](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.custom_resources-readme.html#handling-lifecycle-events-onevent)
  */
 export const handler = async (
-  event: Event
+  event: Event,
 ): Promise<CdkCustomResourceResponse> => {
   try {
     const { parameterName, stringValue, keyId, dataType } =
@@ -37,7 +37,7 @@ export const handler = async (
       await client.send(
         new DeleteParameterCommand({
           Name: parameterName,
-        })
+        }),
       );
 
       return physId;
@@ -62,7 +62,7 @@ export const handler = async (
       new PutParameterCommand({
         ...putInput,
         Value: stringValue + " - " + new Date().toISOString(),
-      })
+      }),
     );
 
     await client.send(
@@ -70,7 +70,7 @@ export const handler = async (
         Name: parameterName,
         ParameterVersion: res.Version ? res.Version - 1 : undefined,
         Labels: ["Dev"],
-      })
+      }),
     );
 
     await client.send(
@@ -78,7 +78,7 @@ export const handler = async (
         Name: parameterName,
         ParameterVersion: res.Version,
         Labels: ["Prod"],
-      })
+      }),
     );
 
     return {

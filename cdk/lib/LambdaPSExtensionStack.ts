@@ -47,7 +47,7 @@ export class LambdaPSExtensionStack extends cdk.Stack {
   constructor(
     scope: Construct,
     id: string,
-    props: LambdaPSExtensionStackProps
+    props: LambdaPSExtensionStackProps,
   ) {
     super(scope, id, props);
 
@@ -67,7 +67,7 @@ export class LambdaPSExtensionStack extends cdk.Stack {
       {
         parameterName: `${paramPath}/dummy-string-list`,
         stringListValue: ["listval-0", "listval-1", "listval-2"],
-      }
+      },
     );
 
     // creates a SecureString Paramter
@@ -80,7 +80,7 @@ export class LambdaPSExtensionStack extends cdk.Stack {
     const stringSecret = new sm.Secret(this, "DummyStringSecret", {
       secretName: "dummy-string-secret",
       secretStringValue: cdk.SecretValue.unsafePlainText(
-        "an-insecure-string-secret-value"
+        "an-insecure-string-secret-value",
       ),
     });
 
@@ -137,17 +137,17 @@ export class LambdaPSExtensionStack extends cdk.Stack {
               resource: "parameter",
               resourceName: "aws/reference/secretsmanager/" + s,
               arnFormat: cdk.ArnFormat.SLASH_RESOURCE_NAME,
-            })
+            }),
           ),
         ],
-      })
+      }),
     );
 
     this.lambda.addToRolePolicy(
       new iam.PolicyStatement({
         actions: ["secretsmanager:GetSecretValue"],
         resources: [binarySecret.secretArn],
-      })
+      }),
     );
 
     this.lambda.node.addDependency(secureString);

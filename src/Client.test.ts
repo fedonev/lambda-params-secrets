@@ -16,14 +16,14 @@ describe("Client returns the expected mock requests.", () => {
   describe("Parameters", () => {
     test("String parameter value returns.", async () => {
       const res = await client.stringParameter(
-        "/lambda-ext-test-param/dummy-string"
+        "/lambda-ext-test-param/dummy-string",
       );
       expect(res).toBe("my-string-param-value");
     });
 
     test("Return the Extension response object, not just the value.", async () => {
       const res = await client.parameterResponse(
-        "/lambda-ext-test-param/dummy-string"
+        "/lambda-ext-test-param/dummy-string",
       );
 
       const isHappyResponse = ParameterHandler.isParameterResponse(res);
@@ -39,7 +39,7 @@ describe("Client returns the expected mock requests.", () => {
 
     test("stringListParameter returns an array of strings.", async () => {
       const res = await client.stringListParameter(
-        "/lambda-ext-test-param/dummy-string-list"
+        "/lambda-ext-test-param/dummy-string-list",
       );
       expect(Array.isArray(res)).toBeTruthy();
       expect(res?.every((el) => typeof el === "string")).toBe(true);
@@ -47,7 +47,7 @@ describe("Client returns the expected mock requests.", () => {
 
     test("secureString returns the decrypted value by default.", async () => {
       const res = await client.secureStringParameter(
-        "/lambda-ext-test-param/dummy-secure-string"
+        "/lambda-ext-test-param/dummy-secure-string",
       );
       expect(res).toMatch(/^my-secure-string-value.*/);
     });
@@ -58,7 +58,7 @@ describe("Client returns the expected mock requests.", () => {
         {
           version: 1, // N.B. including a version ensures key uniqueness, lets the MockRequester look up the right entry in the mock responses
           withDecryption: false,
-        }
+        },
       );
       expect(res?.length).toBeGreaterThan(200);
     });
@@ -92,7 +92,7 @@ describe("Client returns the expected mock requests.", () => {
         expect(res?.SecretString).toBe("an-insecure-string-secret-value");
         expect(res?.SecretBinary).toBe(null);
         expect(res?.VersionStages).toEqual(
-          expect.arrayContaining(["AWSCURRENT"])
+          expect.arrayContaining(["AWSCURRENT"]),
         );
       }
     });
@@ -103,7 +103,7 @@ describe("Client returns the expected mock requests.", () => {
       });
       expect(res instanceof Buffer).toBe(true);
       expect(res?.toString("utf-8")).toBe(
-        "a string secret value to be saved as binary"
+        "a string secret value to be saved as binary",
       );
     });
 
@@ -111,7 +111,7 @@ describe("Client returns the expected mock requests.", () => {
       expect(
         await client.stringSecret("dummy-string-secret", {
           versionStage: "DOESNOTEXIST",
-        })
+        }),
       ).toBe(null);
     });
   });

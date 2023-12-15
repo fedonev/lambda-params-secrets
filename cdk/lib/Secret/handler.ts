@@ -23,7 +23,7 @@ type Event = Omit<CdkCustomResourceEvent, "ResourceProperties"> & {
  * [lifecycle events](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.custom_resources-readme.html#handling-lifecycle-events-onevent)
  */
 export const handler = async (
-  event: Event
+  event: Event,
 ): Promise<CdkCustomResourceResponse> => {
   try {
     const { secretName, secretString, secretBinary, description } =
@@ -40,7 +40,7 @@ export const handler = async (
         new DeleteSecretCommand({
           SecretId: secretName,
           ForceDeleteWithoutRecovery: true,
-        })
+        }),
       );
 
       return physId;
@@ -59,7 +59,7 @@ export const handler = async (
         new CreateSecretCommand({
           ...commonInput,
           Name: secretName,
-        })
+        }),
       );
 
       const suffix = " updatedVersion!";
@@ -75,7 +75,7 @@ export const handler = async (
               ])
             : undefined,
           SecretString: secretString ? secretString + suffix : undefined,
-        })
+        }),
       );
 
       return {
@@ -90,7 +90,7 @@ export const handler = async (
       new UpdateSecretCommand({
         ...commonInput,
         SecretId: secretName,
-      })
+      }),
     );
 
     return {

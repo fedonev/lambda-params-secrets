@@ -58,14 +58,14 @@ export class HttpResponse implements Response {
   static failureResponse(
     data: string,
     statusCode: number | string,
-    statusMessage: string
+    statusMessage: string,
   ): Response {
     return new HttpResponse(`${statusCode} ${statusMessage}: ${data}`, true);
   }
 
   private constructor(
     private data: string,
-    public isError: boolean = false
+    public isError: boolean = false,
   ) {}
 
   get text(): string | null {
@@ -126,15 +126,15 @@ export class HttpRequester implements Requester {
           : HttpResponse.failureResponse(
               data,
               res.statusCode ?? "<?>",
-              res.statusMessage ?? "<Unknown Status>"
+              res.statusMessage ?? "<Unknown Status>",
             );
       })
       .catch((err) =>
         HttpResponse.failureResponse(
           err,
           res.statusCode ?? "<?>",
-          "<Rejection>"
-        )
+          "<Rejection>",
+        ),
       );
   }
 }

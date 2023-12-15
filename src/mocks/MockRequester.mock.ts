@@ -32,8 +32,8 @@ export class MockRequester implements Requester {
           HttpResponse.failureResponse(
             `Cannot find ${resource} in the test responses.`,
             0,
-            "<unknown>"
-          )
+            "<unknown>",
+          ),
         );
       }
 
@@ -43,8 +43,8 @@ export class MockRequester implements Requester {
             HttpResponse.failureResponse(
               testResponse.error.replace("400 Bad Request: ", ""), // test responses already have the statusCode and status Message
               400,
-              "Bad Request"
-            )
+              "Bad Request",
+            ),
           )
         : resolve(HttpResponse.successResponse(JSON.stringify(testResponse)));
     });

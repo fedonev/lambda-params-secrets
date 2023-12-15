@@ -74,7 +74,7 @@ export class ParameterHandler extends Handler {
    * @returns true if `response` is a ParameterResponse
    */
   static isParameterResponse(
-    response: ExtensionResponse
+    response: ExtensionResponse,
   ): response is ParameterResponse {
     return typeof response === "object" && "Parameter" in response;
   }
@@ -105,7 +105,7 @@ export class ParameterHandler extends Handler {
   get path(): string {
     const url = new URL(
       "/systemsmanager/parameters/get",
-      "http://not-used.dummy"
+      "http://not-used.dummy",
     );
 
     url.searchParams.append("name", this.parameterName);
@@ -157,7 +157,7 @@ export class SecretHandler extends Handler {
    * @returns true if `response` is a SecretResponse
    */
   static isSecretResponse(
-    response: ExtensionResponse
+    response: ExtensionResponse,
   ): response is SecretResponse {
     return typeof response === "object" && "SecretString" in response;
   }
