@@ -1,6 +1,6 @@
 {
   "packages": {
-    "dist": {}
+    ".": {}
   },
   "bump-minor-pre-major": true
 }
