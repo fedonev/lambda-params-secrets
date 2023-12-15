@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/fedonev/lambda-params-secrets/compare/v0.1.2...v0.1.3) (2023-12-15)
+
+
+### Bug Fixes
+
+* prettier trailingComma:all ([#22](https://github.com/fedonev/lambda-params-secrets/issues/22)) ([845555b](https://github.com/fedonev/lambda-params-secrets/commit/845555b2f80feb8c34eb3bec84456b64913bfe71)), closes [#20](https://github.com/fedonev/lambda-params-secrets/issues/20)
+
 ## [0.1.2](https://github.com/fedonev/lambda-params-secrets/compare/v0.1.1...v0.1.2) (2022-12-17)
 
 
