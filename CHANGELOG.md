@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/fedonev/lambda-params-secrets/compare/v0.1.3...v1.0.0) (2023-12-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* add fetch requestor, Node 18
+
+### Features
+
+* add fetch requestor, Node 18 ([080a8f1](https://github.com/fedonev/lambda-params-secrets/commit/080a8f1c6ecb3a7e05d22251a66459bde68f0c85)), closes [#17](https://github.com/fedonev/lambda-params-secrets/issues/17)
+
 ## [0.1.3](https://github.com/fedonev/lambda-params-secrets/compare/v0.1.2...v0.1.3) (2023-12-15)
 
 
