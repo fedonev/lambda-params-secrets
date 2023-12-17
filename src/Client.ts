@@ -1,4 +1,4 @@
-import { HttpRequester, Requester } from "./lib/requester";
+import { FetchRequester, Requester } from "./lib/requester";
 import {
   type Handler,
   ParameterHandler,
@@ -86,7 +86,7 @@ export interface ClientOptions {
    * An object capable of making a HTTP GET Request
    *
    * @default
-   * `HttpRequester`
+   * `FetchRequester`
    */
   requester?: Requester;
 }
@@ -108,7 +108,7 @@ export class Client {
    * An object capable of making a HTTP GET Request
    *
    * @default
-   * `HttpRequester`
+   * `FetchRequester`
    */
   private readonly requester: Requester;
 
@@ -131,7 +131,7 @@ export class Client {
       );
     }
 
-    this.requester = props?.requester ?? new HttpRequester();
+    this.requester = props?.requester ?? new FetchRequester();
 
     this.requester.addHeaders({ "X-Aws-Parameters-Secrets-Token": token });
   }

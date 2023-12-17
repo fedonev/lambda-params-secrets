@@ -6,17 +6,17 @@
  */
 {
   "compilerOptions": {
-    // begin @tsconfig/node14
-    "lib": ["es2020"],
-    "module": "commonjs",
-    "target": "es2020",
+    // begin tsconfig bases/node18
+    "lib": ["es2023"],
+    "module": "node16",
+    "target": "es2022",
 
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
-    // end @tsconfig/node14
+    "moduleResolution": "node16",
+    // end tsconfig bases/node18
     "noImplicitAny": false,
     "noUnusedParameters": false,
     "strictPropertyInitialization": false,

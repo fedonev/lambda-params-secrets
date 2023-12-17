@@ -1,11 +1,18 @@
-import { strict as assert } from "assert";
-import { Client } from "../../src";
+import { Client, HttpRequester } from "../../src";
 import type { TestResponses, TestResponse } from "../../data";
 import type { TestResources } from "./LambdaPSExtensionStack";
 
 /**
  * Generate some sample Client responses using the CDK-generted Secrets and Parameters.
  * Retrieve Secrets and Parameters from the Parameter and Secret Extension using the Client.
+ *
+ * If the test cases are run correctly,
+ * the Lambda will return `"result": "success"` in the response:
+ *
+ * `{"result": "success", "responses": { ... }}}`
+ *
+ * If the test cases are run incorrectly,
+ * the Lambda will return `"result": "failure"` in the response.
  *
  * Output is saved at `data/test-responses.json`
  */
@@ -14,10 +21,8 @@ export async function handler(): Promise<TestResponses> {
   const unhappy: Record<string, TestResponse> = {};
 
   try {
-    const client = new Client({
-      token: process.env.AWS_SESSION_TOKEN,
-      port: process.env.PARAMETERS_SECRETS_EXTENSION_HTTP_PORT,
-    });
+    // instantiate a client with default settings
+    const client = new Client();
 
     if (!process.env.TEST_CASES) throw new Error("Missing TEST_CASES!");
     const cases = JSON.parse(process.env.TEST_CASES) as TestResources;
@@ -25,7 +30,11 @@ export async function handler(): Promise<TestResponses> {
     const pp = client.parameterPath;
     const sp = client.secretPath;
 
+    // Happy test cases
     // fetch responses and values for some happy test cases
+    //
+    console.log("Run the Happy 😀 test cases - expect no errors.");
+
     happy[pp(cases.stringParam.name)] = {
       description:
         "The stringParameter method returns a string for a String Parameter.",
@@ -125,7 +134,7 @@ export async function handler(): Promise<TestResponses> {
       })
     ] = {
       description:
-        "The stringSecretfromParameterStore method returns a Secret using the Parameter Store endpoint.",
+        "The stringSecretfromParameterStore method returns a Secret from the Parameter Store endpoint.",
       value: await client.stringSecretfromParameterStore(
         cases.stringSecret.name,
       ),
@@ -189,15 +198,19 @@ export async function handler(): Promise<TestResponses> {
       }),
     };
 
+    // Unhappy test cases
     // fetch responses and values for some error test cases
+    //
+    console.log("Run the Unhappy 😢 test cases - expect errors.");
+
     unhappy[pp("does-not-exist")] = {
-      description: "Error: non-existent or unauthorized parameter.",
+      description: "Error Expected: non-existent or unauthorized parameter.",
       value: await client.stringParameter("does-not-exist"),
       response: await client.parameterResponse("does-not-exist"),
     };
 
     unhappy[pp(cases.stringListParam.name, { version: 0 })] = {
-      description: "Error: invalid Parameter version number.",
+      description: "Error Expected: invalid Parameter version number.",
       value: await client.stringParameter(cases.stringListParam.name, {
         version: 0,
       }),
@@ -208,17 +221,17 @@ export async function handler(): Promise<TestResponses> {
 
     unhappy[pp(cases.stringParam.name, { version: 1 })] = {
       description:
-        "Error: stringListParameter can only be called on a StringList parameter.",
+        "Error Expected: stringListParameter returns a null value if called on a String Parameter.",
       value: await client.stringListParameter(cases.stringParam.name, {
         version: 1,
       }),
-      response: await client.parameterResponse(cases.stringParam.name, {
-        version: 1,
-      }),
+      response: {
+        error: "Cannot parse a String parameter to a list",
+      },
     };
 
     unhappy[sp(cases.stringSecret.name, { versionStage: "DOESNOTEXIST" })] = {
-      description: "Error: non-existent versionStage.",
+      description: "Error Expected: non-existent versionStage.",
       value: await client.stringSecret(cases.stringSecret.name, {
         versionStage: "DOESNOTEXIST",
       }),
@@ -227,11 +240,72 @@ export async function handler(): Promise<TestResponses> {
       }),
     };
 
+    // HTTP requester test cases
+    // test the HttpRequester rquester
+    //
+    console.log("Run the HTTP requester test cases");
+
+    const clientHttp = new Client({
+      requester: new HttpRequester(),
+      token: process.env.AWS_SESSION_TOKEN,
+      port: process.env.PARAMETERS_SECRETS_EXTENSION_HTTP_PORT,
+    });
+
+    happy["HttpRequester-" + pp(cases.stringParam.name)] = {
+      description:
+        "The stringParameter method returns a string for a String Parameter using the HttpRequester.",
+      value: await clientHttp.stringParameter(cases.stringParam.name),
+      response: await clientHttp.parameterResponse(cases.stringParam.name),
+    };
+
+    // fetch responses and values for some error test cases
+    unhappy[pp("HttpRequester-" + "does-not-exist")] = {
+      description:
+        "Error Expected: non-existent or unauthorized parameter using the HttpRequester.",
+      value: await clientHttp.stringParameter("does-not-exist"),
+      response: await clientHttp.parameterResponse("does-not-exist"),
+    };
+
     const responses = { ...happy, ...unhappy };
 
-    assert(Object.values(responses).every((x) => !!x.response));
-    assert(Object.values(happy).every((x) => !!x.value));
-    assert(Object.values(unhappy).every((x) => !x.value));
+    if (!Object.values(responses).every((x) => x.response != undefined)) {
+      const errs = Object.values(responses).filter((x) => !!x.response);
+      console.log(errs);
+
+      throw new Error(
+        "Assert failed - a response is NOT defined for all cases",
+      );
+    }
+
+    if (
+      !Object.values(happy).every(
+        (x) => x.value !== null && x.response["error"] === undefined,
+      )
+    ) {
+      const errs = Object.values(happy).filter(
+        (x) => x.value === null || x.response["error"] !== undefined,
+      );
+      console.log("Happy case errors:", errs);
+
+      throw new Error(
+        "Happy case errors - expected non-null values and undefined errors",
+      );
+    }
+
+    if (
+      !Object.values(unhappy).every(
+        (x) => x.value === null && x.response["error"] !== undefined,
+      )
+    ) {
+      const errs = Object.values(unhappy).filter(
+        (x) => x.value !== null || x.response["error"] === undefined,
+      );
+      console.log("Unhappy case errors", errs);
+
+      throw new Error(
+        "Unhappy case errors - expected null values and defined errors",
+      );
+    }
 
     return { result: "success", responses };
   } catch (err: unknown) {

@@ -60,13 +60,13 @@ Want the whole response instead of just the value? Call [parameterResponse(name,
 
 ### Client options
 
-The [Client options](https://fedonev.github.io/lambda-params-secrets/interfaces/ClientOptions.html) have sensible defaults. Simply calling `new Client()` without options will work in most cases.
+The [Client options](https://fedonev.github.io/lambda-params-secrets/interfaces/ClientOptions.html) have sensible defaults.  Instantiating a client with `new Client()` is a good starting point, which is equivalent to:
 
 ```typescript
 const client = new Client({
   token: process.env.AWS_SESSION_TOKEN, // default value.  AWS set this opaque value.
   port: process.env.PARAMETERS_SECRETS_EXTENSION_HTTP_PORT, // default value.  AWS sets this by default to 2773.
-  requester: new HttpRequester(), // default value.  Bare-bones getter that uses the Node.js core http library.
+  requester: new FetchRequester(), // default value.  Bare-bones getter that uses the Node.js native fetch library.  Use HttpRequester() for NodeJS runtimes < 18.
 });
 ```
 

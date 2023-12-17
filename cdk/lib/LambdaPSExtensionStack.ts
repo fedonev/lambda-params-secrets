@@ -111,6 +111,13 @@ export class LambdaPSExtensionStack extends cdk.Stack {
       entry: path.join(__dirname, "funcTestCases.ts"),
       architecture,
       runtime: lambda.Runtime.NODEJS_18_X,
+      timeout: cdk.Duration.seconds(10),
+      bundling: {
+        externalModules: [
+          "@aws-sdk/client-secrets-manager",
+          "@aws-sdk/client-ssm",
+        ],
+      },
       environment: {
         TEST_CASES: JSON.stringify(testCases),
       },
