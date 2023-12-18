@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/fedonev/lambda-params-secrets/compare/v1.0.2...v1.0.3) (2023-12-18)
+
+
+### Bug Fixes
+
+* SDKs are devDependencies ([#32](https://github.com/fedonev/lambda-params-secrets/issues/32)) ([73dde72](https://github.com/fedonev/lambda-params-secrets/commit/73dde7277aab704eaef6d9b46da861598ad5a49c)), closes [#31](https://github.com/fedonev/lambda-params-secrets/issues/31)
+
 ## [1.0.2](https://github.com/fedonev/lambda-params-secrets/compare/v1.0.1...v1.0.2) (2023-12-18)
 
 
