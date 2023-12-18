@@ -1,3 +1,4 @@
+/*global fetch*/
 import http from "http";
 import https from "https";
 // https://stackoverflow.com/questions/71294230/how-can-i-use-native-fetch-with-node-in-typescript-node-v17-6
