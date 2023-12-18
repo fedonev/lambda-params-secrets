@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/fedonev/lambda-params-secrets/compare/v1.0.1...v1.0.2) (2023-12-18)
+
+
+### Bug Fixes
+
+* suppress eslint error in the console IDE ([#29](https://github.com/fedonev/lambda-params-secrets/issues/29)) ([dc2b9c1](https://github.com/fedonev/lambda-params-secrets/commit/dc2b9c1ff748296127e336f63633fb49f89d581f))
+
 ## [1.0.1](https://github.com/fedonev/lambda-params-secrets/compare/v1.0.0...v1.0.1) (2023-12-18)
 
 

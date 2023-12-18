@@ -1,6 +1,6 @@
 {
   "name": "lambda-params-secrets",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Node.js client for the AWS Lambda Parameters and Secrets Extension",
   "repository": {
     "url": "https://github.com/fedonev/lambda-params-secrets.git",
