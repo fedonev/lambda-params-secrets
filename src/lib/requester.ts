@@ -161,6 +161,7 @@ export class FetchRequester implements Requester {
     this.headers = headers;
   }
 
+  /*global fetch*/
   async get(url: string): Promise<Response> {
     try {
       const res = await fetch(url, { headers: this.headers });
