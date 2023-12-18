@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/fedonev/lambda-params-secrets/compare/v1.0.0...v1.0.1) (2023-12-18)
+
+
+### Bug Fixes
+
+* IDE global fetch warning ([#27](https://github.com/fedonev/lambda-params-secrets/issues/27)) ([5dba066](https://github.com/fedonev/lambda-params-secrets/commit/5dba06659ffe1f183c38e4370abb1147dadd2fa9))
+
 ## [1.0.0](https://github.com/fedonev/lambda-params-secrets/compare/v0.1.3...v1.0.0) (2023-12-17)
 
 
