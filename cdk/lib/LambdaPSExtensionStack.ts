@@ -6,10 +6,6 @@ import { aws_lambda as lambda } from "aws-cdk-lib";
 import { aws_iam as iam } from "aws-cdk-lib";
 import { aws_ssm as ssm } from "aws-cdk-lib";
 import { aws_secretsmanager as sm } from "aws-cdk-lib";
-import {
-  LambdaPSExtension,
-  type LayerArnComponents,
-} from "./LambdaPSExtension";
 import { SecureString } from "./SecureString";
 import { Secret } from "./Secret";
 
@@ -25,17 +21,7 @@ export type TestResources = Record<
   { name: string; versionId?: string }
 >;
 
-interface LambdaPSExtensionStackProps extends cdk.StackProps {
-  /**
-   * The ARN of the AWS-managed Lambda Parameters and Secrets Extension layer.
-   *
-   * Provide an ARN from the list in the [AWS docs](https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-integration-lambda-extensions.html#ps-integration-lambda-extensions-add).
-   * or a map of ARN components.
-   * @default
-   * Try to look up the ARN from a local map using the Stack's region.
-   */
-  layerArn?: string | LayerArnComponents;
-}
+interface LambdaPSExtensionStackProps extends cdk.StackProps {}
 
 /**
  * A stack to test the `lambda-ext-params-secrers` client.
@@ -106,6 +92,10 @@ export class LambdaPSExtensionStack extends cdk.Stack {
      */
     const architecture = lambda.Architecture.ARM_64;
 
+    const paramsAndSecrets = lambda.ParamsAndSecretsLayerVersion.fromVersion(
+      lambda.ParamsAndSecretsVersions.V1_0_103,
+    );
+
     this.lambda = new nodejs.NodejsFunction(this, "PSExtensionLambda", {
       description: "Run test cases against the P&S Extension with the Client",
       entry: path.join(__dirname, "funcTestCases.ts"),
@@ -121,11 +111,7 @@ export class LambdaPSExtensionStack extends cdk.Stack {
       environment: {
         TEST_CASES: JSON.stringify(testCases),
       },
-      layers: [
-        new LambdaPSExtension(this, "PSExtension", {
-          layerArn: props.layerArn ?? { architecture },
-        }),
-      ],
+      paramsAndSecrets,
     });
 
     stringParam.grantRead(this.lambda);
