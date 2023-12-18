@@ -74,8 +74,7 @@ export class HttpResponse implements Response {
     return this.isError ? null : this.data;
   }
 
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  get json(): any {
+  get json() {
     try {
       if (this.isError) return null;
       return JSON.parse(this.data);
