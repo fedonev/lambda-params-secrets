@@ -25,7 +25,7 @@ jobs:
       url: '${{ steps.deployment.outputs.page_url }}' # single quote supresses VSCode extension intellisense issue https://github.com/cschleiden/vscode-github-actions/issues/175
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6 # https://github.com/actions/checkout
+      - uses: actions/checkout@v7 # https://github.com/actions/checkout
       - uses: actions/setup-node@v6 # https://github.com/actions/setup-node
         with:
           node-version: "24"
