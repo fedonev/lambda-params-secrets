@@ -1,4 +1,5 @@
 # Post-release Publish package to npm
+# https://docs.npmjs.com/trusted-publishers#step-2-configure-your-cicd-workflow
 name: Publish to npm
 
 on:
@@ -11,6 +12,10 @@ concurrency:
   group: npm
   cancel-in-progress: true
 
+permissions:
+  id-token: write # Required for OIDC npm trusted publishing
+  contents: read
+
 jobs:
   publish-npm:
     name: Publish to npm
@@ -18,13 +23,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4 # https://github.com/actions/checkout
+        uses: actions/checkout@v6 # https://github.com/actions/checkout
       - name: Setup
-        uses: actions/setup-node@v4 # https://github.com/actions/setup-node
+        uses: actions/setup-node@v6 # https://github.com/actions/setup-node
         with:
-          node-version: 20
-          registry-url: 'https://registry.npmjs.org'
-          cache: npm
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
       - run: npm ci
       - run: npm run build
       - run: npm test
@@ -34,6 +39,5 @@ jobs:
           cp README.md CHANGELOG.md LICENSE ./dist
           jq 'del(.devDependencies) | del(.scripts)' package.json > ./dist/package.json
       - name: Publish
-        run: cd dist && npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} 
+        working-directory: dist
+        run: npm publish
