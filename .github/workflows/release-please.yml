@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Release Please!
-        uses: google-github-actions/release-please-action@v4 # https://github.com/google-github-actions/release-please-action
+        uses: googleapis/release-please-action@v5 # https://github.com/googleapis/release-please-action
         with:
-          # https://github.com/google-github-actions/release-please-action#configuration
+          # https://github.com/googleapis/release-please-action#basic-configuration
           release-type: node
           token: ${{ secrets.GH_PAT_ACTIONS_WORKFLOW }} # PAT required to trigger downstream workflows
