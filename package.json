@@ -35,7 +35,7 @@
     "@aws-sdk/client-ssm": "^3.1078.0",
     "@types/aws-lambda": "^8.10.162",
     "@types/jest": "^30.0.0",
-    "@types/node": "^18.19.130",
+    "@types/node": "^26.1.0",
     "@typescript-eslint/eslint-plugin": "^8.62.1",
     "@typescript-eslint/parser": "^8.62.1",
     "aws-cdk": "^2.1129.0",
