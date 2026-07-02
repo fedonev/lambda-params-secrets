@@ -21,7 +21,7 @@ export type TestResources = Record<
   { name: string; versionId?: string }
 >;
 
-interface LambdaPSExtensionStackProps extends cdk.StackProps {}
+type LambdaPSExtensionStackProps = cdk.StackProps;
 
 /**
  * A stack to test the `lambda-ext-params-secrers` client.

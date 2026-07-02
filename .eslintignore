@@ -1,6 +1,0 @@
-**/*.js
-
-# artefacts
-dist
-build
-cdk.out

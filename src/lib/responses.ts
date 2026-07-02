@@ -5,9 +5,7 @@ import type { GetSecretValueCommandOutput } from "@aws-sdk/client-secrets-manage
  * Extension responses
  */
 export type ExtensionResponse =
-  | ParameterResponse
-  | SecretResponse
-  | ErrorResponse;
+  ParameterResponse | SecretResponse | ErrorResponse;
 
 /**
  * The Extension's response for Parameters.
@@ -25,11 +23,10 @@ export interface ParameterResponse {
   ResultMetadata: Record<never, never>;
 }
 
-interface ExtensionParameter
-  extends Omit<
-    Parameter,
-    "DataType" | "LastModifiedDate" | "Selector" | "SourceResult" | "Value"
-  > {
+interface ExtensionParameter extends Omit<
+  Parameter,
+  "DataType" | "LastModifiedDate" | "Selector" | "SourceResult" | "Value"
+> {
   DataType: string | null;
   LastModifiedDate: string;
   Selector: string | null;
@@ -48,11 +45,10 @@ interface ExtensionParameter
  *
  * See: [GetSecretValueCommandOutput](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-secrets-manager/interfaces/getsecretvaluecommandoutput.html).
  */
-export interface SecretResponse
-  extends Omit<
-    GetSecretValueCommandOutput,
-    "CreatedDate" | "SecretBinary" | "SecretString" | "$metadata"
-  > {
+export interface SecretResponse extends Omit<
+  GetSecretValueCommandOutput,
+  "CreatedDate" | "SecretBinary" | "SecretString" | "$metadata"
+> {
   CreatedDate: string;
   /**
    * The Binary Secret value.

@@ -1,7 +1,7 @@
 import http from "http";
 import https from "https";
-// https://stackoverflow.com/questions/71294230/how-can-i-use-native-fetch-with-node-in-typescript-node-v17-6
-import type { HeadersInit } from "undici";
+
+type HeadersInit = NonNullable<RequestInit["headers"]>;
 
 /**
  * Requesters return this.

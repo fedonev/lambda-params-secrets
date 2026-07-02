@@ -38,15 +38,17 @@ export class MockRequester implements Requester {
       }
 
       // simulate an error if the test result is an error
-      "error" in testResponse
-        ? resolve(
-            HttpResponse.failureResponse(
-              testResponse.error.replace("400 Bad Request: ", ""), // test responses already have the statusCode and status Message
-              400,
-              "Bad Request",
-            ),
-          )
-        : resolve(HttpResponse.successResponse(JSON.stringify(testResponse)));
+      if ("error" in testResponse) {
+        resolve(
+          HttpResponse.failureResponse(
+            testResponse.error.replace("400 Bad Request: ", ""), // test responses already have the statusCode and status Message
+            400,
+            "Bad Request",
+          ),
+        );
+      } else {
+        resolve(HttpResponse.successResponse(JSON.stringify(testResponse)));
+      }
     });
   }
 }
