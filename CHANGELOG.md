@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/fedonev/lambda-params-secrets/compare/v1.0.3...v1.0.4) (2026-07-03)
+
+
+### Bug Fixes
+
+* harden client response handling ([5a8a9e3](https://github.com/fedonev/lambda-params-secrets/commit/5a8a9e3116ec7796d9fef60d28c5b49687810b36))
+
 ## [1.0.3](https://github.com/fedonev/lambda-params-secrets/compare/v1.0.2...v1.0.3) (2023-12-18)
 
 
