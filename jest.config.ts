@@ -5,6 +5,18 @@ const jestConfig: JestConfigWithTsJest = {
   ...createDefaultPreset({ tsconfig: "tsconfig.json" }),
   verbose: false,
   testEnvironment: "node",
+  moduleFileExtensions: [
+    "ts",
+    "tsx",
+    "mts",
+    "cts",
+    "js",
+    "jsx",
+    "mjs",
+    "cjs",
+    "json",
+    "node",
+  ],
   modulePathIgnorePatterns: ["<rootDir>/dist/"],
 };
 
