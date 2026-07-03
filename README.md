@@ -1,6 +1,6 @@
 # lambda-params-secrets
 
-A Node.js client for the [AWS Lambda Parameters and Secrets Extension](https://aws.amazon.com/about-aws/whats-new/2022/10/aws-parameters-secrets-lambda-extension/).
+A zero-dependency Node.js client for the [AWS Lambda Parameters and Secrets Extension](https://aws.amazon.com/about-aws/whats-new/2022/10/aws-parameters-secrets-lambda-extension/).
 
 ## What does it do?
 
@@ -21,7 +21,7 @@ A Node.js client for the [AWS Lambda Parameters and Secrets Extension](https://a
 npm install --save lambda-params-secrets
 ```
 
-The main `Client` class itself has zero dependencies.  The package has dependencies on the AWS JS SDK v3 clients `@aws-sdk/client-secrets-manager` and `@aws-sdk/client-ssm` for their Typescript type definitions only.
+The package has zero runtime dependencies.
 
 ### Usage
 
@@ -29,12 +29,12 @@ Instantiate a Client in your Lambda function handler. Call the Client's methods 
 
 ```typescript
 // my_lambda_handler.ts
-import { Client } from 'lambda-params-secrets';
+import { Client } from "lambda-params-secrets";
 
 export async function handler(): Promise<void> {
   const client = new Client();
   const fooListParam: string[] = await client.stringListParameter(
-    '/my-app/config/foo-list'
+    "/my-app/config/foo-list",
   );
   console.log(fooListParam); // -> ["foo", "bar", "baz"]
 }
@@ -60,7 +60,7 @@ Want the whole response instead of just the value? Call [parameterResponse(name,
 
 ### Client options
 
-The [Client options](https://fedonev.github.io/lambda-params-secrets/interfaces/ClientOptions.html) have sensible defaults.  Instantiating a client with `new Client()` is a good starting point, which is equivalent to:
+The [Client options](https://fedonev.github.io/lambda-params-secrets/interfaces/ClientOptions.html) have sensible defaults. Instantiating a client with `new Client()` is a good starting point, which is equivalent to:
 
 ```typescript
 const client = new Client({

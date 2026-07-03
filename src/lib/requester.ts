@@ -109,34 +109,42 @@ export class HttpRequester implements Requester {
 
   async get(url: string): Promise<Response> {
     // https://developer.mozilla.org/en-US/docs/Web/API/fetch
-    const res = await new Promise<http.IncomingMessage>((resolve) => {
-      const components = new URL(url);
-      const getter = components.protocol.startsWith("https") ? https : http;
-      getter.get(url, { headers: this.headers }, resolve);
-    });
+    let res: http.IncomingMessage | undefined;
 
-    return new Promise<string>((resolve, reject) => {
-      let data = "";
-      res.on("data", (chunk) => (data += chunk));
-      res.on("error", (err) => reject(err));
-      res.on("end", () => resolve(data));
-    })
-      .then((data) => {
-        return res.statusCode === 200
-          ? HttpResponse.successResponse(data)
-          : HttpResponse.failureResponse(
-              data,
-              res.statusCode ?? "<?>",
-              res.statusMessage ?? "<Unknown Status>",
-            );
-      })
-      .catch((err) =>
-        HttpResponse.failureResponse(
-          err,
-          res.statusCode ?? "<?>",
-          "<Rejection>",
-        ),
+    try {
+      const response = await new Promise<http.IncomingMessage>(
+        (resolve, reject) => {
+          const components = new URL(url);
+          const getter = components.protocol.startsWith("https") ? https : http;
+          const request = getter.get(url, { headers: this.headers }, resolve);
+          request.on("error", reject);
+        },
       );
+      res = response;
+
+      const data = await new Promise<string>((resolve, reject) => {
+        let body = "";
+        response.on("data", (chunk) => (body += chunk));
+        response.on("error", reject);
+        response.on("end", () => resolve(body));
+      });
+
+      return response.statusCode === 200
+        ? HttpResponse.successResponse(data)
+        : HttpResponse.failureResponse(
+            data,
+            response.statusCode ?? "<?>",
+            response.statusMessage ?? "<Unknown Status>",
+          );
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error ? err.message : "Unknown Server Error";
+      return HttpResponse.failureResponse(
+        message,
+        res?.statusCode ?? "503",
+        res ? "<Rejection>" : "Server Error",
+      );
+    }
   }
 }
 

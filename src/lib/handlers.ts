@@ -74,9 +74,13 @@ export class ParameterHandler extends Handler {
    * @returns true if `response` is a ParameterResponse
    */
   static isParameterResponse(
-    response: ExtensionResponse,
+    response: ExtensionResponse | null,
   ): response is ParameterResponse {
-    return typeof response === "object" && "Parameter" in response;
+    return (
+      response !== null &&
+      typeof response === "object" &&
+      "Parameter" in response
+    );
   }
 
   constructor(props: ParameterHandlerProps) {
@@ -157,9 +161,13 @@ export class SecretHandler extends Handler {
    * @returns true if `response` is a SecretResponse
    */
   static isSecretResponse(
-    response: ExtensionResponse,
+    response: ExtensionResponse | null,
   ): response is SecretResponse {
-    return typeof response === "object" && "SecretString" in response;
+    return (
+      response !== null &&
+      typeof response === "object" &&
+      "SecretString" in response
+    );
   }
 
   constructor(props: SecretHandlerProps) {

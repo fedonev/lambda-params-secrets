@@ -18,8 +18,9 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
+    "build": "tsc --noEmit",
+    "watch": "tsc --noEmit -w",
+    "pretest": "tsc --noEmit",
     "test": "jest",
     "lint": "eslint .",
     "build-docs": "npx typedoc",

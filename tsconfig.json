@@ -10,9 +10,10 @@
     "lib": ["es2023"],
     "module": "node16",
     "target": "es2022",
-    "types": ["node"],
+    "types": ["node", "jest"],
 
     "strict": true,
+    "isolatedModules": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -32,9 +33,6 @@
     "resolveJsonModule": true
   },
   "exclude": [
-    "**/*.spec.ts",
-    "**/*.mock.ts",
-    "**/*.test.ts",
     "node_modules",
     "dist",
     "scripts",

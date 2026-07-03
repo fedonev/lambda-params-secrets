@@ -1,6 +1,3 @@
-import type { Parameter } from "@aws-sdk/client-ssm";
-import type { GetSecretValueCommandOutput } from "@aws-sdk/client-secrets-manager";
-
 /**
  * Extension responses
  */
@@ -23,21 +20,22 @@ export interface ParameterResponse {
   ResultMetadata: Record<never, never>;
 }
 
-interface ExtensionParameter extends Omit<
-  Parameter,
-  "DataType" | "LastModifiedDate" | "Selector" | "SourceResult" | "Value"
-> {
+interface ExtensionParameter {
+  ARN?: string;
   DataType: string | null;
   LastModifiedDate: string;
+  Name?: string;
   Selector: string | null;
   /**
    * SourceResult is the JSON response from Secrets Manager.  Null for Paramter Store requests.
    */
   SourceResult: string | null;
+  Type?: "String" | "StringList" | "SecureString";
   /**
    * Value returns null if a BinarySecret is returned from the Parameter endpoint.
    */
   Value: string | null;
+  Version?: number;
 }
 
 /**
@@ -45,11 +43,10 @@ interface ExtensionParameter extends Omit<
  *
  * See: [GetSecretValueCommandOutput](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-secrets-manager/interfaces/getsecretvaluecommandoutput.html).
  */
-export interface SecretResponse extends Omit<
-  GetSecretValueCommandOutput,
-  "CreatedDate" | "SecretBinary" | "SecretString" | "$metadata"
-> {
+export interface SecretResponse {
+  ARN?: string;
   CreatedDate: string;
+  Name?: string;
   /**
    * The Binary Secret value.
    * The Extension returns `SecretBinary` as a Base64 encoded string.
@@ -59,6 +56,8 @@ export interface SecretResponse extends Omit<
    * The String Secrert value.
    */
   SecretString: string | null;
+  VersionId?: string;
+  VersionStages?: string[];
   /**
    * The Extension appears to always return an empty object `{}`-
    */

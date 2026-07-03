@@ -146,7 +146,12 @@ export class Client {
 
     if (res.error) return { error: res.error };
 
-    return res.json;
+    const json = res.json;
+    if (json === null || typeof json !== "object" || Array.isArray(json)) {
+      return { error: "Invalid JSON response from extension." };
+    }
+
+    return json;
   }
 
   /**

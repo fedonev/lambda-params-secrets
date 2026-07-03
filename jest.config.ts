@@ -2,7 +2,7 @@
 import { createDefaultPreset, type JestConfigWithTsJest } from "ts-jest";
 
 const jestConfig: JestConfigWithTsJest = {
-  ...createDefaultPreset({ tsconfig: "tsconfig.test.json" }),
+  ...createDefaultPreset({ tsconfig: "tsconfig.json" }),
   verbose: false,
   testEnvironment: "node",
   modulePathIgnorePatterns: ["<rootDir>/dist/"],
