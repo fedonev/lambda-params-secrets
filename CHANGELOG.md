@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.5](https://github.com/fedonev/lambda-params-secrets/compare/v1.0.4...v1.0.5) (2026-07-03)
+
+
+### Bug Fixes
+
+* prefer TypeScript sources in Jest ([ae8cc01](https://github.com/fedonev/lambda-params-secrets/commit/ae8cc015cf0e02acb0a6524f17de232f1c88a49b))
+* update description and url ([3da9969](https://github.com/fedonev/lambda-params-secrets/commit/3da9969edcc56901e880988a7d4fd7ec95039828))
+
 ## [1.0.4](https://github.com/fedonev/lambda-params-secrets/compare/v1.0.3...v1.0.4) (2026-07-03)
 
 
